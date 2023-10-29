@@ -11,8 +11,6 @@ import Link from "next/link";
 export default function HomePage() {
   const { data, error, isLoading } = useSWR(urlApi("/events"), fetcher);
 
-  console.log(data);
-
   if (isLoading) {
     return <LoaderPage />;
   }
