@@ -1,5 +1,15 @@
-export default async function fetcher(...args: RequestInfo[]) {
-  const response = await fetch(...(args as [RequestInfo, RequestInit]));
-  const data = await response.json();
-  return data;
-}
+export const fetcher = async (url: string, needToken?: boolean) => {
+  const requestInit: RequestInit = {};
+  if (needToken) {
+    const tokenInStorage = localStorage.getItem("x-auth");
+    const requestHeader: HeadersInit = new Headers();
+    requestHeader.set("Content-Type", "application/json");
+    if (tokenInStorage) {
+      requestHeader.set("Authorization", `Bearer ${tokenInStorage}`);
+    }
+    requestInit["headers"] = requestHeader;
+  }
+
+  const res = await fetch(url, requestInit);
+  return await res.json();
+};
