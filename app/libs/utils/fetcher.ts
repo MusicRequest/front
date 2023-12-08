@@ -1,11 +1,13 @@
+import Cookies from "js-cookie";
+
 export const fetcher = async (url: string, needToken?: boolean) => {
   const requestInit: RequestInit = {};
   if (needToken) {
-    const tokenInStorage = localStorage.getItem("x-auth");
+    const tokenInCookie = Cookies.get("x-auth");
     const requestHeader: HeadersInit = new Headers();
     requestHeader.set("Content-Type", "application/json");
-    if (tokenInStorage) {
-      requestHeader.set("Authorization", `Bearer ${tokenInStorage}`);
+    if (tokenInCookie) {
+      requestHeader.set("Authorization", `Bearer ${tokenInCookie}`);
     }
     requestInit["headers"] = requestHeader;
   }

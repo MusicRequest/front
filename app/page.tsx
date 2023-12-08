@@ -2,14 +2,17 @@
 
 import * as React from "react";
 import useSWR from "swr";
-import fetcher from "./libs/utils/fetcher";
+import { fetcher } from "./libs/utils/fetcher";
 import urlApi from "./libs/utils/urlApi";
 import LoaderPage from "./components/common/loaderPage";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 
 export default function HomePage() {
-  const { data, error, isLoading } = useSWR(urlApi("/events"), fetcher);
+  const { data, error, isLoading } = useSWR(
+    [urlApi("/events"), true],
+    ([url, needToken]) => fetcher(url, needToken)
+  );
 
   if (isLoading) {
     return <LoaderPage />;
