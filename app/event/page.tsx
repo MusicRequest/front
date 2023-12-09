@@ -4,20 +4,41 @@ import * as React from "react";
 import useSWR from "swr";
 import urlApi from "../libs/utils/urlApi";
 import { fetcher } from "../libs/utils/fetcher";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
+import LoaderPage from "../components/common/LoaderPage";
+import useUser from "../libs/hooks/useUser";
 
 export interface IAppProps {}
 
-export default function TestPage(props: IAppProps) {
+export default function TestPage() {
+  const router = useRouter();
   const {
     data: events,
     error,
-    isLoading,
+    isLoading: isLoadingEvent,
   } = useSWR(urlApi("/events"), fetcher, { revalidateOnFocus: false });
 
+  const { user, verifyUser } = useUser();
+
   if (events && events.length === 0) {
-    redirect("/");
+    router.push("/");
   }
 
-  return <div>Event</div>;
+  React.useEffect(() => {
+    if (events && events.length > 0) {
+      if (!user) {
+        router.push(`/event/${events[0].id}/new`);
+      } else {
+        verifyUser(events[0].id)
+          .then(() => {
+            router.push(`/event/${events[0].id}`);
+          })
+          .catch((error) => {
+            router.push(`/event/${events[0].id}/new`);
+          });
+      }
+    }
+  }, [events]);
+
+  return <LoaderPage />;
 }
