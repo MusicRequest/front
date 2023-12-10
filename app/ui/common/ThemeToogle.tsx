@@ -1,3 +1,4 @@
+"use client";
 import useThemeMode from "@/app/libs/hooks/useThemeMode";
 import classNamesJoin from "@/app/libs/utils/classNamesJoin";
 import { Switch } from "@headlessui/react";
