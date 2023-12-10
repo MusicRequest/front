@@ -5,7 +5,7 @@ import useSWR from "swr";
 import urlApi from "../libs/utils/urlApi";
 import { fetcher } from "../libs/utils/fetcher";
 import { useRouter } from "next/navigation";
-import LoaderPage from "../components/common/LoaderPage";
+import LoaderPage from "../ui/common/LoaderPage";
 import useUser from "../libs/hooks/useUser";
 
 export interface IAppProps {}

@@ -4,7 +4,7 @@ import * as React from "react";
 import useSWR from "swr";
 import { fetcher } from "./libs/utils/fetcher";
 import urlApi from "./libs/utils/urlApi";
-import LoaderPage from "./components/common/LoaderPage";
+import LoaderPage from "./ui/common/LoaderPage";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 

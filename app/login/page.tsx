@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 import useSWR from "swr";
 import urlApi from "../libs/utils/urlApi";
 import { fetcher } from "../libs/utils/fetcher";
-import LoaderPage from "../components/common/LoaderPage";
+import LoaderPage from "../ui/common/LoaderPage";
 
 const Page = () => {
   const { data, error, isLoading } = useSWR(

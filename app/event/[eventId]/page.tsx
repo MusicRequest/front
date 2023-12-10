@@ -1,5 +1,5 @@
 "use client";
-import LoaderPage from "@/app/components/common/LoaderPage";
+import LoaderPage from "@/app/ui/common/LoaderPage";
 import useUser from "@/app/libs/hooks/useUser";
 import { fetcher } from "@/app/libs/utils/fetcher";
 import urlApi from "@/app/libs/utils/urlApi";
@@ -33,5 +33,10 @@ export default function Page({ params }: { params: { eventId: string } }) {
     return <LoaderPage />;
   }
 
-  return <>{data.name}</>;
+  return (
+    <div className="bg-gray-50 dark:bg-gray-800 min-h-screen flex flex-col justify-between">
+      test
+    </div>
+  );
+  // <>{data.name}</>;
 }
