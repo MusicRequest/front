@@ -18,8 +18,14 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  if (request.nextUrl.pathname.startsWith("/admin") && !token) {
-    return NextResponse.redirect(new URL("/login", request.url));
+  if (request.nextUrl.pathname.startsWith("/admin")) {
+    if (!token) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+
+    if (request.nextUrl.pathname === "/admin") {
+      return NextResponse.redirect(new URL("/admin/music", request.url));
+    }
   }
 
   return NextResponse.next();
