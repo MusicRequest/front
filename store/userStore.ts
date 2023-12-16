@@ -12,6 +12,6 @@ export const useUserStore = create(
       user: null,
       setUser: (newUser: User | null) => set({ user: newUser }),
     }),
-    { name: "user" }
-  )
+    { name: "user" },
+  ),
 );
