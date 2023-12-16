@@ -6,10 +6,6 @@ import fetchData from "../libs/utils/fetch";
 import { notifyError } from "../libs/utils/notify";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
-import useSWR from "swr";
-import urlApi from "../libs/utils/urlApi";
-import { fetcher } from "../libs/utils/fetcher";
-import LoaderPage from "../ui/common/LoaderPage";
 
 const Page = () => {
   const [userName, setUserName] = useState("");
