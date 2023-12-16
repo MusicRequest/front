@@ -31,9 +31,9 @@ NavBarProps) {
               <Bars4Icon className="h-6 w-6" aria-hidden="true" />
             </Popover.Button>
           </div>
-          {/* <div className="col-span-4 w-12/12  ">
-            {textBanner ? <TextScrollingBanner text={textBanner} /> : null}
-          </div> */}
+          <div className="col-span-4 w-12/12  ">
+            {/*{textBanner ? <TextScrollingBanner text={textBanner} /> : null}*/}
+          </div>
           <div className="flex justify-center items-center">
             <ThemeToogle />
           </div>

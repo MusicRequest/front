@@ -14,7 +14,7 @@ import LoaderPage from "../ui/common/LoaderPage";
 const Page = () => {
   const { data, error, isLoading } = useSWR(
     [urlApi("/auth/me"), true],
-    ([url, needToken]) => fetcher(url, needToken)
+    ([url, needToken]) => fetcher(url, needToken),
   );
 
   const [userName, setUserName] = useState("");
@@ -33,7 +33,7 @@ const Page = () => {
       const login: { token: string } = await fetchData(
         baseUrl("/auth/login"),
         "POST",
-        body
+        body,
       );
       Cookies.set("x-auth", login.token);
 
