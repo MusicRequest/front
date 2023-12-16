@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import baseUrl from "../libs/utils/urlApi";
 import fetchData from "../libs/utils/fetch";
 import { notifyError } from "../libs/utils/notify";
@@ -12,11 +12,6 @@ import { fetcher } from "../libs/utils/fetcher";
 import LoaderPage from "../ui/common/LoaderPage";
 
 const Page = () => {
-  const { data, error, isLoading } = useSWR(
-    [urlApi("/auth/me"), true],
-    ([url, needToken]) => fetcher(url, needToken),
-  );
-
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const router = useRouter();
@@ -42,10 +37,6 @@ const Page = () => {
       notifyError("Une erreur est survenue");
     }
   };
-
-  if (isLoading) {
-    return <LoaderPage />;
-  }
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
