@@ -40,7 +40,6 @@ jobs:
 #                      public
 #                  retention-days: 7
     docker:
-        needs: build-front
         name: Docker magic !
         runs-on: ubuntu-22.04
         #    env:
