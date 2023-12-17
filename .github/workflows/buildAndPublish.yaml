@@ -7,38 +7,6 @@ on:
             - "main"
 
 jobs:
-#    build-front:
-#        name: Front build
-#        runs-on: ubuntu-22.04
-#        steps:
-#            - name: ⬇️ Checkout code
-#              uses: actions/checkout@v3
-#            - name: 💽 Setup nodejs
-#              uses: actions/setup-node@v3
-#              with:
-#                  node-version-file: './package.json'
-#                  cache: 'npm'
-#                  cache-dependency-path: '**/package-lock.json'
-#            - name: 📦 Install NPM front packages
-#              working-directory: ./
-#              run: |
-#                  npm install
-#            - name: 🏗️ Build front
-#              working-directory: ./
-#              run: |
-#                  npm run build
-#            - name: 🏗️  Generate
-#              working-directory: ./front
-#              run: |
-#                  npm run generate
-#            - name: ↗️ Upload build artifact
-#              uses: actions/upload-artifact@v3
-#              with:
-#                  name: build
-#                  path: |
-#                      .next
-#                      public
-#                  retention-days: 7
     docker:
         name: Docker magic !
         runs-on: ubuntu-22.04
