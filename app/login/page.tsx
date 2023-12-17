@@ -11,7 +11,6 @@ const Page = () => {
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const router = useRouter();
-  console.log("test");
 
   const login = async (e: FormEvent) => {
     e.preventDefault();
