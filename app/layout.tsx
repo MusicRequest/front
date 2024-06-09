@@ -4,13 +4,15 @@ import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { ThemeProvider } from "@/app/providers/theme-provider";
-
-const inter = Inter({ subsets: ["latin"] });
+import Providers from "@/components/Providers";
+import React from "react";
 
 export const metadata: Metadata = {
   title: "Music Request",
   description: "Make your request and vote for you're favourite music!!!!",
 };
+
+const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
@@ -18,12 +20,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider attribute="class">
-          <ToastContainer />
-          {children}
-        </ThemeProvider>
+    <html lang="en" suppressHydrationWarning className="h-full">
+      <body className={inter.className + " h-full text-sm dark:bg-background"}>
+        <Providers>
+          <ThemeProvider attribute="class">
+            <ToastContainer />
+            {children}
+          </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

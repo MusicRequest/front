@@ -125,7 +125,7 @@ export function DataTable<TData, TValue>({
       />
       <div className="rounded-md border">
         <Table>
-          <TableHeader className={"bg-gray-50 dark:bg-inherit"}>
+          <TableHeader className={"bg-gray-50 dark:bg-background"}>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
@@ -151,7 +151,7 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  className={"border-b bg-white dark:bg-inherit"}
+                  className={"border-b bg-white dark:bg-background"}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id} className="py-3">

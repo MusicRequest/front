@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import ThemeSelect from "@/app/ui/common/ThemeToogle";
+import { useAuth } from "@/components/hook/useAuth";
 
 type RouterItem = {
   id: number;
@@ -49,10 +50,10 @@ export const ROUTES: RouterItem[] = [
 
 const NavBar = () => {
   const pathname = usePathname();
+  const { logout } = useAuth();
 
   const disconect = () => {
-    // localStorage.removeItem("token");
-    // history.push("/");
+    logout();
   };
 
   return (
@@ -75,7 +76,7 @@ const NavBar = () => {
                         {
                           "dark:border-white dark:text-white border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 ":
                             pathname === item.path,
-                        }
+                        },
                       )}
                       aria-current={pathname === item.path ? "page" : undefined}
                     >
