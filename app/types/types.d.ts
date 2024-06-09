@@ -6,3 +6,11 @@ type User = {
   createdAt: string;
   updatedAt: string;
 };
+
+type Event = {
+  id: string;
+  name: string;
+  background_image?: string;
+  options: object;
+  participants: [];
+};
