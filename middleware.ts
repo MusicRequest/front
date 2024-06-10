@@ -24,7 +24,7 @@ export function middleware(request: NextRequest) {
     }
 
     if (request.nextUrl.pathname === "/admin") {
-      return NextResponse.redirect(new URL("/admin/music", request.url));
+      return NextResponse.redirect(new URL("/admin/event", request.url));
     }
   }
 

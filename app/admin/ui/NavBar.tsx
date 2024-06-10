@@ -18,22 +18,22 @@ type RouterItem = {
 export const ROUTES: RouterItem[] = [
   {
     id: 1,
-    path: "/admin/music",
-    name: "Musique",
-    icon: "mdi mdi-pencil-circle",
-  },
-  {
-    id: 2,
-    path: "/admin/picture",
-    name: "Photo",
-    icon: "mdi mdi-pencil-circle",
-  },
-  {
-    id: 3,
     path: "/admin/event",
     name: "Event",
     icon: "mdi mdi-pencil-circle",
   },
+  {
+    id: 2,
+    path: "/admin/music",
+    name: "Musique",
+    icon: "mdi mdi-pencil-circle",
+  },
+  // {
+  //   id: 3,
+  //   path: "/admin/picture",
+  //   name: "Photo",
+  //   icon: "mdi mdi-pencil-circle",
+  // },
   {
     id: 4,
     path: "/admin/visitor",
