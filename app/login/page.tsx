@@ -1,103 +1,114 @@
 "use client";
 
-import React, { FormEvent, useState } from "react";
-import baseUrl from "../libs/utils/urlApi";
-import fetchData from "../libs/utils/fetch";
+import React from "react";
 import { notifyError } from "../libs/utils/notify";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { useMutation } from "@tanstack/react-query";
+import { BaseUrl } from "@/service/common.service";
+import useAxios from "@/components/hook/useAxios";
+
+const formSchema = z.object({
+  username: z.string().min(2, {
+    message: "Username must be at least 2 characters.",
+  }),
+  password: z.string().min(2, {
+    message: "Password must be at least 2 characters.",
+  }),
+});
+
 const Page = () => {
-  const [userName, setUserName] = useState("");
-  const [userPassword, setUserPassword] = useState("");
   const router = useRouter();
+  const axiosAuth = useAxios();
 
-  const login = async (e: FormEvent) => {
-    e.preventDefault();
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+  });
 
-    const body = {
-      username: userName,
-      password: userPassword,
-    };
-
-    try {
-      const login: { token: string } = await fetchData(
-        baseUrl("/auth/login"),
-        "POST",
-        body,
-      );
-      Cookies.set("x-auth", login.token);
-
+  const mutation = useMutation({
+    mutationFn: async (data: any) => {
+      const r = await axiosAuth.post<any>(BaseUrl.Login, data);
+      return r.data;
+    },
+    onSuccess: (data: { token: string }) => {
+      Cookies.set("x-auth", data.token);
       router.push("/admin");
-    } catch (e) {
+    },
+    onError: (e) => {
+      console.log(e);
       notifyError("Une erreur est survenue");
-    }
-  };
+    },
+  });
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    mutation.mutate(values);
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Connection
+          Bienvenue,
         </h2>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form
-            className="space-y-6"
-            onSubmit={(e) => {
-              e.preventDefault();
-              login(e);
-            }}
-          >
-            <div>
-              <label
-                htmlFor="username"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Nom
-              </label>
-              <input
-                onChange={(e) => {
-                  setUserName(e.target.value);
-                }}
-                autoComplete="username"
-                id="username"
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <FormField
+                control={form.control}
                 name="username"
-                type="text"
-                required
-                className="mt-1 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Nom d&apos;utilisateur</FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-            </div>
-
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Password
-              </label>
-              <input
-                onChange={(e) => {
-                  setUserPassword(e.target.value);
-                }}
-                id="password"
+              <FormField
+                control={form.control}
                 name="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm mt-1"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Mot de passe</FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-            </div>
-
-            <button
-              type="submit"
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Se connecter
-            </button>
-          </form>
+              <Button
+                loading={mutation.isPending}
+                type="submit"
+                className={"w-full"}
+              >
+                Se connecter
+              </Button>
+            </form>
+          </Form>
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 "use client";
+
 import NavBar from "./ui/NavBar";
 import React from "react";
 export default function Layout({
