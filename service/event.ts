@@ -1,27 +1,19 @@
-import {
-  BaseUrl,
-  Filters,
-  joinFilterArguments,
-} from "@/service/common.service";
+import { BaseUrl } from "@/service/common.service";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 import useAxios from "@/components/hook/useAxios";
-import { AxiosResponse } from "axios";
+import { Event } from "@/lib/types";
 
 export const useGetEvents = ({
-  filters,
   options,
 }: {
-  filters: Filters;
   options: UseQueryOptions<Event[], Error, Event[], any[]>;
 }) => {
-  const { axiosNoAuth } = useAxios();
-  const requestArguments = joinFilterArguments(filters);
+  const axiosAuth = useAxios();
 
   return useQuery<Event[], Error, Event[], any[]>({
-    queryFn: () => {
-      return axiosNoAuth
-        .get<any[]>(BaseUrl.Event + requestArguments)
-        .then((r: AxiosResponse) => r.data);
+    queryFn: async () => {
+      const r = await axiosAuth.get<any[]>(BaseUrl.Event);
+      return r.data;
     },
     ...options,
   });
