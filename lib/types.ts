@@ -1,4 +1,4 @@
-type User = {
+export type User = {
   id: string;
   name: string;
   countVoting: number;
@@ -7,7 +7,7 @@ type User = {
   updatedAt: string;
 };
 
-type Event = {
+export type Event = {
   id: string;
   name: string;
   background_image?: string;

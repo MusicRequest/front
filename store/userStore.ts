@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { User } from "@/lib/types";
 
 interface IUserStore {
   user: User | null;

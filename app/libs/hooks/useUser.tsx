@@ -1,6 +1,7 @@
 import { useUserStore } from "@/store/userStore";
 import fetchData from "../utils/fetch";
 import baseUrl from "../utils/urlApi";
+import { User } from "@/lib/types";
 
 export default function useUser() {
   const { user, setUser } = useUserStore();
@@ -11,7 +12,7 @@ export default function useUser() {
       try {
         await fetchData(
           baseUrl(`/visitor/${USER_ID}/verify/${eventID}`),
-          "GET"
+          "GET",
         );
       } catch (err) {
         console.log(err);
