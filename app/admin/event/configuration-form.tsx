@@ -1,7 +1,6 @@
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -24,17 +23,6 @@ import { EventOptions, MessageDefault } from "@/lib/enum";
 import { Checkbox } from "@/components/ui/checkbox";
 
 import { confirm } from "@/components/ui/confirm/confirm";
-
-const options = [
-  {
-    id: "recents",
-    label: "Recents",
-  },
-  {
-    id: "home",
-    label: "Home",
-  },
-];
 
 const formSchema = z.object({
   name: z.string().min(2, {
