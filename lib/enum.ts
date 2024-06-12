@@ -10,3 +10,8 @@ export enum EventOptions {
   WallPicture = "wall-picture",
   MusicRequest = "music-request",
 }
+
+export enum KeyCache {
+  Visitors = "visitors",
+  Events = "events",
+}
