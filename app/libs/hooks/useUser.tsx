@@ -11,7 +11,7 @@ export default function useUser() {
       const USER_ID = user.id;
       try {
         await fetchData(
-          baseUrl(`/visitor/${USER_ID}/verify/${eventID}`),
+          baseUrl(`/visitors/${USER_ID}/verify/${eventID}`),
           "GET",
         );
       } catch (err) {

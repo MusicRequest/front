@@ -14,3 +14,9 @@ export type Event = {
   options: object;
   participants: [];
 };
+
+export type Visitor = {
+  id: string;
+  name: string;
+  isNotAllowed: boolean;
+};
