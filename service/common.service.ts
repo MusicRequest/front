@@ -14,4 +14,5 @@ export const joinFilterArguments = (filters: Filters): string => {
 export enum BaseUrl {
   Login = "/auth/login",
   Event = "/events",
+  Visitor = "/visitors",
 }
