@@ -5,9 +5,7 @@ import { DataTable } from "@/components/ui/data-table/data-table";
 import { columnsMusic } from "@/app/admin/music/columns-music";
 import PageHeading from "@/components/ui/page-heading";
 
-type Props = {};
-
-const page = (props: Props) => {
+const page = () => {
   const data = [
     {
       id: "728ed52f",

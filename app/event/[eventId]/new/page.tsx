@@ -17,6 +17,7 @@ export default function Page({ params }: { params: { eventId: string } }) {
     if (user) {
       verifyUser(eventId);
     }
+    /* eslint-disable-next-line */
   }, []);
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
