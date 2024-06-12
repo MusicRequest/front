@@ -5,6 +5,7 @@ import baseUrl from "@/app/libs/utils/urlApi";
 import { useRouter } from "next/navigation";
 
 import React from "react";
+import { User } from "@/lib/types";
 
 export default function Page({ params }: { params: { eventId: string } }) {
   const eventId = params.eventId;
@@ -21,7 +22,7 @@ export default function Page({ params }: { params: { eventId: string } }) {
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     try {
-      const visitor: User = await fetchData(baseUrl("/visitor"), "POST", {
+      const visitor: User = await fetchData(baseUrl("/visitors"), "POST", {
         name: pseudo,
         eventId,
       });

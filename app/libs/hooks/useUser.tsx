@@ -25,9 +25,9 @@ export default function useUser() {
     setUser(param);
   };
 
-  const removeOlderUser = async () => {
-    // TODO: A intégrer
-  };
+  // const removeOlderUser = async () => {
+  //   // TODO: A intégrer
+  // };
 
   return { user, verifyUser, saveVisitor };
 }

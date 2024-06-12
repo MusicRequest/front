@@ -32,7 +32,7 @@ export default function HomePage() {
           <p className="max-w-xl mt-5 mx-auto text-xl text-gray-500">
             Veuillez vous connecter afin de creer un évenement!
           </p>
-          <Link href="/login">
+          <Link href={"/login"}>
             <div className="inline-flex rounded-md">
               <div className="mt-4 inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
                 Login

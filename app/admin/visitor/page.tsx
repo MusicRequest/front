@@ -35,7 +35,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { BaseUrl } from "@/service/common.service";
 import { notifyError, notifySuccess } from "@/app/libs/utils/notify";
 import { Switch } from "@/components/ui/switch";
-import { Key } from "lucide-react";
 
 export default function PageVisitor() {
   const [showUpdated, setShowUpdated] = useState(false);
@@ -56,11 +55,11 @@ export default function PageVisitor() {
     options: { queryKey: [KeyCache.Visitors], enabled: !!events?.[0] },
   });
 
-  if (isLoadingEvent) {
+  if (isLoadingEvent || isLoadingVisitor) {
     return <LoaderPage />;
   }
 
-  if (error) {
+  if (error || errorVisitor) {
     return <ErrorLanding />;
   }
 
@@ -119,6 +118,7 @@ const DialogUpdateVisitor = ({
     } else {
       form.reset();
     }
+    /* eslint-disable-next-line */
   }, [showDialog, visitor]);
 
   const mutation = useMutation({
