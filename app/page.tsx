@@ -1,18 +1,16 @@
 "use client";
 
 import * as React from "react";
-import useSWR from "swr";
-import { fetcher } from "./libs/utils/fetcher";
-import urlApi from "./libs/utils/urlApi";
 import LoaderPage from "./ui/common/LoaderPage";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { useGetEvents } from "@/service/event";
+import { KeyCache } from "@/lib/enum";
 
 export default function HomePage() {
-  const { data, error, isLoading } = useSWR(
-    [urlApi("/events"), true],
-    ([url, needToken]) => fetcher(url, needToken)
-  );
+  const { data, isLoading, error } = useGetEvents({
+    options: { queryKey: [KeyCache.Events] },
+  });
 
   if (isLoading) {
     return <LoaderPage />;
@@ -20,7 +18,7 @@ export default function HomePage() {
 
   if (error) return <div>error</div>;
 
-  if (data.length > 0) {
+  if (data?.length && data?.length > 0) {
     redirect("event");
   }
 
