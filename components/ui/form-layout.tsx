@@ -5,7 +5,7 @@ const FormLayout = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("space-y-4", className)} {...props} />
+  <div ref={ref} className={cn("space-y-6", className)} {...props} />
 ));
 FormLayout.displayName = "FormLayout";
 
@@ -56,7 +56,10 @@ const FormLayoutActions = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("mt-6 flex items-center justify-end gap-x-6", className)}
+    className={cn(
+      "mt-6 flex items-center justify-center md:justify-end gap-x-6",
+      className,
+    )}
     {...props}
   />
 ));
